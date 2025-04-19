@@ -5,6 +5,8 @@
 
 #include "Renderer.h"
 
+
+
 struct VertexBufferElement {
 	unsigned int type;
 	unsigned int count;
@@ -16,7 +18,7 @@ struct VertexBufferElement {
 			case GL_UNSIGNED_INT:		return 4;
 			case GL_UNSIGNED_BYTE:		return 4;
 		}
-		ASSERT(false);
+		//ASSERT(false);
 		return 0;
 	}
 };
