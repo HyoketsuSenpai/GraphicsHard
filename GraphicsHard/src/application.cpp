@@ -69,17 +69,18 @@ int main(void)
         };*/
 
         float data_vb[] = {
-            -0.9f, -0.3f,
-            -0.3f, -0.3f,
-            -0.3f,  0.3f,
-            -0.9f,  0.3f,
+            //x, y, color(rgba)
+            -0.9f, -0.3f, 0.18f, 0.6f, 0.96f, 1.0f,
+            -0.3f, -0.3f, 0.18f, 0.6f, 0.96f, 1.0f,
+            -0.3f,  0.3f, 0.18f, 0.6f, 0.96f, 1.0f,
+            -0.9f,  0.3f, 0.18f, 0.6f, 0.96f, 1.0f,
 
-             0.3f, -0.3f,
-             0.9f, -0.3f,
-             0.9f,  0.3f,
-             0.3f,  0.3f,
+             0.3f, -0.3f, 1.0f, 0.86f, 0.23f, 1.0f,
+             0.9f, -0.3f, 1.0f, 0.86f, 0.23f, 1.0f,
+             0.9f,  0.3f, 1.0f, 0.86f, 0.23f, 1.0f,
+             0.3f,  0.3f, 1.0f, 0.86f, 0.23f, 1.0f,
         };
-        int sz_vb = 2;
+        int sz_vb = 2 + 4;
         int rows_vb = 8;
 
         VertexBuffer vb(data_vb, sz_vb * rows_vb * sizeof(float));
@@ -99,7 +100,7 @@ int main(void)
         VertexBufferLayout vbl;
 
         vbl.Push<float>(2);
-      
+        vbl.Push<float>(4);
 
         VertexArray va;
 
