@@ -68,6 +68,49 @@ int main(void)
             2, 3, 0
         };*/
 
+        float data_vb[] = {
+            -0.9f, -0.3f,
+            -0.3f, -0.3f,
+            -0.3f,  0.3f,
+            -0.9f,  0.3f,
+
+             0.3f, -0.3f,
+             0.9f, -0.3f,
+             0.9f,  0.3f,
+             0.3f,  0.3f,
+        };
+        int sz_vb = 2;
+        int rows_vb = 8;
+
+        VertexBuffer vb(data_vb, sz_vb * rows_vb * sizeof(float));
+
+        unsigned int data_ib[] = {
+            0, 1, 2, 
+            2, 3, 0,
+
+            4, 5, 6,
+            6, 7, 4,
+        };
+
+        int ind_ib = 12;
+
+        IndexBuffer ib(data_ib, ind_ib);
+
+        VertexBufferLayout vbl;
+
+        vbl.Push<float>(2);
+      
+
+        VertexArray va;
+
+        va.AddBuffer(vb, vbl);
+
+        Shader shader("res/shaders/Basic.shader");
+
+        shader.Bind();
+        shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+
+
         GLCall(glEnable(GL_BLEND));
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -123,7 +166,9 @@ int main(void)
 
         while (!glfwWindowShouldClose(window))
         {
-            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+            renderer.Clear();
+            
+            /*GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             renderer.Clear();
 
             ImGui_ImplOpenGL3_NewFrame();
@@ -140,7 +185,7 @@ int main(void)
                 }
                 currentTest->OnImGuiRender();
                 ImGui::End();
-            }
+            }*/
 
 /*
             {
@@ -176,8 +221,10 @@ int main(void)
             }
 */
 
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            //ImGui::Render();
+            //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            renderer.Draw(va, ib, shader);
 
             glfwSwapBuffers(window);
 
